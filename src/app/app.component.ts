@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import 'prismjs';
 import 'prismjs/components/prism-java';
@@ -12,15 +12,18 @@ declare const Prism: any;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'code-editor';
   HTMLSnippet!: string;
-  code = `// Java Program to print an arraylist of an \n// user-defined collection
- 
-import java.util.*;
- 
-class GFG {
- 
-    String name;
+  customCode!: string;
+
+  @ViewChild('customCodeHighlighter', { static: true })
+  customCodeHighlighter!: ElementRef;
+  @ViewChild('customCodeSnippet', { static: true })
+  customCodeSnippet!: ElementRef;
+  @ViewChild('javaCodeContent', { static: true })
+  javaCodeContent!: ElementRef;
+  @ViewChild('preCodeBlock', { static: true }) preCodeBlock!: ElementRef;
+
+  code = `// Java Program to print an arraylist of an \n// user-defined collection\n\nimport java.util.*;\n\nclass GFG {\n\n\tString name;
     int rollNo;
  
     // constructor of class GFG
@@ -64,5 +67,26 @@ class GFG {
 
   ngOnInit(): void {
     this.HTMLSnippet = Prism.highlight(this.code, Prism.languages.java, 'java');
+    this.javaCodeContent.nativeElement.innerHTML = this.HTMLSnippet;
+    this.customCode = this.code;
+  }
+
+  onInput(): void {
+    let code = this.customCode;
+    if (code.endsWith('\n')) {
+      code += ' ';
+    }
+    this.javaCodeContent.nativeElement.innerHTML = code;
+    Prism.highlightElement(this.javaCodeContent.nativeElement);
+  }
+
+  syncScroll(): void {
+    const elemContainer = this.customCodeHighlighter.nativeElement;
+    const elemTextArea = this.customCodeSnippet.nativeElement;
+    const preCodeBlock = this.preCodeBlock.nativeElement;
+    window.setTimeout(() => {
+      elemContainer.scrollTop = elemTextArea.scrollTop;
+      preCodeBlock.scrollLeft = elemTextArea.scrollLeft;
+    }, 1);
   }
 }

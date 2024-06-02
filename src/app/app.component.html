@@ -1,2 +1,9 @@
-<pre id="language-java-block"
-  class="line-numbers"><code class="language-java"><div [innerHTML]="HTMLSnippet"></div></code></pre>
+<label for="custom-code-snippet" [hidden]="true">Implicit Label</label>
+<textarea #customCodeSnippet id="custom-code-snippet" [(ngModel)]="customCode"
+  (ngModelChange)="onInput(); syncScroll();" (scroll)="syncScroll()" (keydown.TAB)="$event.preventDefault()"
+  spellcheck="false"></textarea>
+
+<div #customCodeHighlighter id="custom-code-highliter">
+  <pre #preCodeBlock id="language-java-block"
+    class="line-numbers"><code #javaCodeContent id="language-java-block-content" class="language-java"></code></pre>
+</div>

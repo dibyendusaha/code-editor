@@ -1,5 +1,44 @@
-#language-java-block {
-  width: 1024px;
-  height: 500px;
-  font-size: 12px;
+@mixin common-style {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  padding: 10px;
+  border: 0;
+  outline: none;
+  width: 800px;
+  height: 400px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+#custom-code-snippet {
+  @include common-style;
+  padding-top: 34px;
+  padding-left: 74px;
+  width: calc(800px - 64px);
+  background: transparent;
+  color: transparent;
+  caret-color: black;
+  z-index: 99;
+  resize: none;
+  font-size: 12pt;
+  line-height: 16pt;
+  font-family: monospace;
+  &::selection {
+    color: red;
+    background: yellow;
+  }
+}
+
+#custom-code-highliter {
+  @include common-style;
+  padding-bottom: 34px;
+  overflow: hidden;
+  z-index: 0;
+  * {
+    font-size: 12pt;
+    line-height: 16pt;
+    font-family: monospace;
+  }
 }
