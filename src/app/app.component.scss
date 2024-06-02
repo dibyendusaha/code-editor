@@ -15,7 +15,7 @@
 #custom-code-snippet {
   @include common-style;
   padding-top: 34px;
-  padding-left: 74px;
+  padding-left: 70px;
   width: calc(800px - 64px);
   background: transparent;
   color: transparent;
@@ -36,9 +36,25 @@
   padding-bottom: 34px;
   overflow: hidden;
   z-index: 0;
+  pre {
+    min-height: 400px;
+  }
   * {
     font-size: 12pt;
     line-height: 16pt;
     font-family: monospace;
   }
+}
+
+.wrapper {
+  position: relative;
+  height: 500px;
+}
+
+button {
+  padding: 8px;
+  background: yellow;
+  border: 2px solid red;
+  cursor: pointer;
+  font-family: monospace;
 }

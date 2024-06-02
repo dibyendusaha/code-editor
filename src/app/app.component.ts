@@ -89,4 +89,10 @@ export class AppComponent implements OnInit {
       preCodeBlock.scrollLeft = elemTextArea.scrollLeft;
     }, 1);
   }
+
+  getCodeOutput(): void {
+    alert('Please check browser console!');
+    console.clear();
+    console.log(this.customCode);
+  }
 }
